@@ -3,6 +3,10 @@ Software requiremements
 * Python 2.
 * Epydoc just if document generation is needed.
 
+Retrieve source code
+--------------------
+git clone https://github.com/skibyte/walldo.git
+
 Building walldo
 ---------------
 python2 setup.py build
