@@ -70,7 +70,7 @@ class ConfigReader():
                     try:
                         self.directories[resolution] = \
                                 cfg.get(resolution, "directory")
-                    except ConfigParser.NoOptionError as detail:
+                    except ConfigParser.NoOptionError , detail:
                         print detail
                         print "Please edit: " + config_file + \
                         " to fix this problem.\n"
