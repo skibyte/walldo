@@ -1,0 +1,24 @@
+Software requiremements
+-----------------------
+* Python 2.
+* Epydoc just if document generation is needed.
+
+Building walldo
+---------------
+python2 setup.py build
+This will create the files in the build directory.
+
+Installing walldo
+-----------------
+python2 setup.py install
+This will install walldo in the default path.
+
+Installing walldo in a specific path
+------------------------------------
+python2 setup.py install --prefix=/usr
+This will install walldo in usr directory.
+
+Documentation generation
+------------------------
+epydoc --config=epydoc.conf
+This will create a doc directory with the documentation in it.

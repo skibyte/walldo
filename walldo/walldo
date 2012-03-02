@@ -1,0 +1,234 @@
+#!/usr/bin/env python2
+
+# Walldo - A wallpaper downloader
+# Copyright (C) 2012  Fernando Castillo skibyte@gmail.com
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ 
+from walldo import downloader
+from walldo import configreader
+from walldo import util
+from walldo import urlbuilder
+from walldo import sorting
+from walldo import parser
+
+import sys
+import os
+import getopt
+import ConfigParser
+
+
+def createconfigfile(filepath):
+    """
+    Creates a walldo configuration file, this routine does not check if the 
+    filepath already exists.
+
+    @param filepath: The location where the configuration file will be created
+    """
+
+    resolutions = util.getsupportedresolutions()
+    configfile = open(filepath,'wb')
+
+    for resolution in resolutions:
+
+        configfile.write("#["+resolution+"]\n")
+        configfile.write("#directory = wallpapers/"+resolution+"\n\n")
+
+    configfile.close()
+
+def printhelpmenu():
+    """
+    Prints the available arguments to modify walldo behavior
+    Available options:
+        - -d Download web pages based on the date
+        - -d Download web pages based on the date
+        - -d Download web pages based on the date
+        - -d Download web pages based on the date
+        - -d Download web pages based on the date
+        - -d Download web pages based on the date
+    """
+    print "Usage: walldo [options]\n"
+    print "Options:\n"
+    print "-d        Download web pages based on the date."
+    print "-r        Download web pages based on the raiting."
+    print "-D        Download web pages based on the downloads."
+    print "-n        Specify number of wallpapers to download (default 10)."
+    print "-c <file> Specify configuration file to use."
+    print "-s        Print supported resolutions of wallpapers."
+    print "-h        Help menu.\n"
+
+    print "\nConfiguration file format:\n"
+    print "if a configuration file is not provided in command line walldo " +\
+            "will search in $HOME/.walldorc"
+    print "This file consists of lines with the following format:"
+    print "\n[<wallpaper_resolution>]"
+    print "directory = <directory where wallpapers will be downloaded>"
+    print "Where <wallpaper_resolution> is one of the supported " +\
+            "resolutions, returned by 'walldo -s'"
+    print "\nSamples:"
+    print "This will download wallpaper with a resolution of 1280x1024 into" +\
+            "the directory mywallpapers"
+    print "[1280x1024]"
+    print "directory = mywallpapers"
+    print "\nThis will download wallpaper with a resolution of 1920x1200" +\
+            "into the directory mywallpapers"
+    print "[1920x1200]"
+    print "directory = wallpapers"
+
+
+def printsupportedresolutions():
+    print "Supported resolutions:"
+
+    print "\nApple Devices:"
+    print "2048x2048"
+    print "1024x1024 - iPad and iPad 2"
+    print "640x960   - iPhone 4"
+    print "320x480   - iPhone/3G/3GS, Palm Pre"
+
+    print "\nBlackberry:"
+    print "360x480"
+    print "320x240"
+
+    print "\nDual Monitors:"
+    print "3360x1050 - Dual 1680x1050"
+    print "3200x1200 - Dual 1600x1200"
+    print "2880x900  - Dual 1440x900"
+    print "2560x1024 - Dual 1280x1024"
+
+    print "\nFullscreen 4:3 :"
+    print "1600x1200"
+    print "1400x1050"
+    print "1280x960"
+    print "1024x768"
+
+    print "\nFullscreen 5:4 :"
+    print "1280x1024"
+
+    print "\nGoogle Android:"
+    print "1080x960"
+    print "960x854"
+    print "960x800"
+    print "640x480"
+
+    print "\nHDTV 16:9 :"
+    print "1920x1080 - 1080p"
+    print "1280x720  - 720p"
+
+    print "\nNetbook:"
+    print "1366x768"
+    print "1024x600"
+    print "800x480"
+
+    print "\nOther:"
+    print "480x272 - Sony PSP"
+    print "320x400 - Palm Pixi, HP Veer"
+
+    print "\nTriple Monitors:"
+    print "3072x768"
+
+    print "\nWidescreen 16:10 :"
+    print "2560x1600"
+    print "1920x1200"
+    print "1680x1050"
+    print "1440x900"
+    print "1280x800"
+
+    print "\nWidescreen 16:9 :"
+    print "2560x1440"
+    print "1600x900"
+
+    print "\nWindows Phone 7:"
+    print "480x800"
+
+def main():
+    sort = sorting.Sort.DATE
+    number_wallpapers = 10
+    configfileprovided = False
+    configfileexists = False
+    configfile = os.environ['HOME'] + os.sep + '.walldorc'
+
+    if os.path.isfile(configfile):
+        configfileexists = True
+
+    if len(sys.argv) > 1:
+        try:
+            opts, args =  getopt.getopt(sys.argv[1:],"hdrDn:c:s")
+
+            for o, a in opts:
+                if o == '-h':
+                    printhelpmenu()
+                    sys.exit(0)
+                elif o == '-d':
+                    sort = sorting.Sort.DATE
+                elif o == '-r':
+                    sort = sorting.Sort.RAITING
+                elif o == '-D':
+                    sort = sorting.Sort.DOWNLOADS
+                elif o == '-n':
+                    number_wallpapers = int(a)
+                elif o == '-c':
+                    configfile = a
+                    configFileProvided = True
+                elif o == '-s':
+                    printsupportedresolutions()
+                    sys.exit(0)
+
+        except getopt.GetoptError:
+            printhelpmenu()
+            sys.exit()
+
+    if not configfileprovided and not configfileexists:
+        createconfigfile(configfile)
+
+    builder = urlbuilder.URLBuilder(sort)
+    p = parser.Parser()
+    config = configreader.ConfigReader()
+    config.read(configfile)
+    directories = config.getdirectories()
+
+    for resolution in directories.keys():
+        if not os.path.isdir(directories[resolution]):
+            print "Directory " + directories[resolution] + " does not exist"
+            try:
+                os.makedirs(directories[resolution])
+                print "Created directory: " + directories[resolution]
+            except :
+                print "Could not create directory: " + directories[resolution]
+                del directories[resolution]
+
+    dwn = downloader.Downloader(number_wallpapers*len(directories))
+
+    for resolution in directories.keys():
+        print "Resolution: %s\tDirectory: %s" % (resolution, \
+                directories[resolution])
+        read_wallpapers = 0
+        builder.reset()
+        while read_wallpapers < number_wallpapers: 
+            page = dwn.download(builder.getnextpage())
+            local = page.readlines()
+            links = p.parse(local, resolution)
+            for l in links:
+                url = "http://interfacelift.com"+l
+                dwn.downloadandsave(url, directories[resolution], \
+                        url.split('/')[-1])
+                read_wallpapers +=1
+                if read_wallpapers >= number_wallpapers:
+                    break
+        print ""                        
+
+    if len(directories) == 0:
+        print "There are no directories configured, please edit " + configfile 
+
+main()
