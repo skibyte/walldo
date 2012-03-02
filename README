@@ -5,7 +5,7 @@ http://interfacelift.com .
 
 Contact
 -------
-Fernando Castillo skibyte@gmail.com
+Author: Fernando Castillo skibyte@gmail.com
 
 Installation
 ------------
@@ -52,3 +52,8 @@ directory = wallpapers
 License
 -------
 See COPYING file for details.
+
+Report a bug
+---------------
+If you find a bug in walldo please let me know in the following page:
+https://github.com/skibyte/walldo/issues
