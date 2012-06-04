@@ -13,12 +13,12 @@ See INSTALL file for details
 
 Usage
 -----
-* Execute walldo for first time and a .walldorc file will be created in your 
+- Execute walldo for first time and a .walldorc file will be created in your 
   $HOME directory.
-* Edit .walldorc and uncomment the desired resolutions and their respectives
+- Edit .walldorc and uncomment the desired resolutions and their respectives
   directories where the wallpapers will be downloaded.
-* Execute walldo again.
-* A progress indicator will appear showing that walldo is downloading 
+- Execute walldo again.
+- A progress indicator will appear showing that walldo is downloading 
   wallpapers (10 by default).
 
 Walldo options
