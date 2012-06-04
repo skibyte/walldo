@@ -38,15 +38,17 @@ This file consists of lines with the following format:
 
     [<wallpaper_resolution>]  
     directory = <directory where wallpapers will be downloaded>
-Where <wallpaper_resolution> is one of the supported resolutions, returned by 'walldo -s'
+Where \<wallpaper_resolution\> is one of the supported resolutions, returned by 'walldo -s'
 
 ### Samples
-This will download wallpaper with a resolution of 1280x1024 intothe directory mywallpapers  
-    [1280x1024]  
+This will download wallpaper with a resolution of 1280x1024 intothe directory mywallpapers
+
+    [1280x1024]
     directory = mywallpapers
 
-This will download wallpaper with a resolution of 1920x1200into the directory mywallpapers  
-    [1920x1200]  
+This will download wallpaper with a resolution of 1920x1200into the directory mywallpapers
+
+    [1920x1200]
     directory = wallpapers
 
 License
