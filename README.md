@@ -13,12 +13,12 @@ See INSTALL file for details
 
 Usage
 -----
-- Execute walldo for first time and a .walldorc file will be created in your 
+1. Execute walldo for first time and a .walldorc file will be created in your 
   $HOME directory.
-- Edit .walldorc and uncomment the desired resolutions and their respectives
+2. Edit .walldorc and uncomment the desired resolutions and their respectives
   directories where the wallpapers will be downloaded.
-- Execute walldo again.
-- A progress indicator will appear showing that walldo is downloading 
+3. Execute walldo again.
+4. A progress indicator will appear showing that walldo is downloading 
   wallpapers (10 by default).
 
 Walldo options
@@ -41,11 +41,11 @@ This file consists of lines with the following format:
 Where <wallpaper_resolution> is one of the supported resolutions, returned by 'walldo -s'
 
 ### Samples
-    This will download wallpaper with a resolution of 1280x1024 intothe directory mywallpapers
+This will download wallpaper with a resolution of 1280x1024 intothe directory mywallpapers
     [1280x1024]
     directory = mywallpapers
 
-    This will download wallpaper with a resolution of 1920x1200into the directory mywallpapers
+This will download wallpaper with a resolution of 1920x1200into the directory mywallpapers
     [1920x1200]
     directory = wallpapers
 
