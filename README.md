@@ -1,6 +1,6 @@
 Walldo
 ======
-Walldo is a program written in Python which downloads wallapapers from 
+Walldo is a program written in Python which downloads wallpapers from 
 http://interfacelift.com .
 
 Contact
