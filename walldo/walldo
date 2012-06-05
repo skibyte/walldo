@@ -53,16 +53,17 @@ def printhelpmenu():
     Prints the available arguments to modify walldo behavior
     Available options:
         - -d Download web pages based on the date
-        - -d Download web pages based on the date
-        - -d Download web pages based on the date
-        - -d Download web pages based on the date
-        - -d Download web pages based on the date
-        - -d Download web pages based on the date
+        - -r Download web pages based on the rating
+        - -D Download web pages based on the number of downloads
+        - -n Specify number of wallpapers to download
+        - -c Specify configuration file to use
+        - -s Print supported resolutions of wallpapers
+        - -h Print help menu
     """
     print "Usage: walldo [options]\n"
     print "Options:\n"
     print "-d        Download web pages based on the date."
-    print "-r        Download web pages based on the raiting."
+    print "-r        Download web pages based on the rating."
     print "-D        Download web pages based on the downloads."
     print "-n        Specify number of wallpapers to download (default 10)."
     print "-c <file> Specify configuration file to use."
