@@ -16,21 +16,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  
-import unittest;
+import unittest
+from walldo.configreader import ConfigReader
 
-from walldo.parsertestcase import ParserTestCase
-from walldo.urlbuildertestcase import URLBuilderTestCase
-from walldo.configreadertestcase import ConfigReaderTestCase
 
-def main():
-    loader = unittest.TestLoader()
-    suite = unittest.TestSuite()
-    suite.addTests(loader.loadTestsFromTestCase(ParserTestCase))
-    suite.addTests(loader.loadTestsFromTestCase(URLBuilderTestCase))
-    suite.addTests(loader.loadTestsFromTestCase(ConfigReaderTestCase))
-    runner = unittest.TextTestRunner(verbosity=1)
-    result = runner.run(suite)
+class ConfigReaderTestCase(unittest.TestCase):
+    def testRead(self):
+        reader = ConfigReader()
+        reader.read('walldo/test_file.txt')
 
-if __name__ == '__main__':
-    sys.exit(main())
-
+        dictionary = reader.getdirectories()
+        self.assertEquals('directory1', dictionary['1024x768'], 'Entry is incorrect')
+        self.assertEquals('directory2', dictionary['1280x1024'], 'Entry is incorrect')

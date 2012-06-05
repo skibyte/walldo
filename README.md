@@ -23,7 +23,7 @@ Usage
 Walldo options
 --------------
 * -d        Download web pages based on the date.
-* -r        Download web pages based on the raiting.
+* -r        Download web pages based on the rating.
 * -D        Download web pages based on the downloads.
 * -n        Specify number of wallpapers to download (default 10).
 * -c <file> Specify configuration file to use.
