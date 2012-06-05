@@ -1,3 +1,4 @@
+#
 # Walldo - A wallpaper downloader
 # Copyright (C) 2012  Fernando Castillo skibyte@gmail.com
 # 
