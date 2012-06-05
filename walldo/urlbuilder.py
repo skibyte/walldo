@@ -1,3 +1,4 @@
+#
 # Walldo - A wallpaper downloader
 # Copyright (C) 2012  Fernando Castillo skibyte@gmail.com
 # 
@@ -44,7 +45,7 @@ class URLBuilder():
         """
 
         self.currentpage += 1
-        if self.sorting == Sort.RAITING:
+        if self.sorting == Sort.RATING:
             return "http://interfacelift.com/wallpaper/downloads/" + \
             "rating/any/index" + str(self.currentpage) + ".html"
         elif self.sorting == Sort.DOWNLOADS:

@@ -28,7 +28,7 @@ class Sort():
     Encapsulates the order used to download wallpapers.
     """
     DATE = 1
-    RAITING = 2
+    RATING = 2
     DOWNLOADS = 3
 
     def __init__(self):

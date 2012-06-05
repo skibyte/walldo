@@ -19,12 +19,14 @@
 import unittest;
 
 from walldo.parsertestcase import ParserTestCase
+from walldo.urlbuildertestcase import URLBuilderTestCase
 
 
 def main():
     loader = unittest.TestLoader()
     suite = unittest.TestSuite()
     suite.addTests(loader.loadTestsFromTestCase(ParserTestCase))
+    suite.addTests(loader.loadTestsFromTestCase(URLBuilderTestCase))
     runner = unittest.TextTestRunner(verbosity=1)
     result = runner.run(suite)
 
