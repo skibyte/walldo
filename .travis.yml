@@ -9,5 +9,9 @@ python:
 install:
     - python setup.py install
 
+branches:
+    only:
+        - development
+
 script:
     - python setup.py test
